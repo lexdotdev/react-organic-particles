@@ -1,0 +1,62 @@
+{
+  "name": "@lexdotdev/react-organic-particles",
+  "version": "0.1.0",
+  "description": "GPU-animated organic particle fields for React with Three.js and React Three Fiber",
+  "license": "MIT",
+  "type": "module",
+  "sideEffects": false,
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js",
+      "require": "./dist/index.cjs"
+    }
+  },
+  "files": ["dist"],
+  "scripts": {
+    "dev": "vite",
+    "format": "biome format . --write",
+    "format:check": "biome format .",
+    "lint": "biome lint .",
+    "lint:fix": "biome lint . --write",
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run",
+    "test:coverage": "vitest run --coverage",
+    "build": "vite build",
+    "validate": "npm run format:check && npm run lint && npm run typecheck && npm run test && npm run build",
+    "prepublishOnly": "npm run validate"
+  },
+  "peerDependencies": {
+    "@react-three/fiber": "^8 || ^9",
+    "react": "^18 || ^19",
+    "react-dom": "^18 || ^19",
+    "three": ">=0.160"
+  },
+  "dependencies": {
+    "@react-three/drei": "^9.120.0",
+    "@react-three/postprocessing": "^2.16.5"
+  },
+  "devDependencies": {
+    "@biomejs/biome": "^1.9.4",
+    "@react-three/fiber": "^8.17.10",
+    "@testing-library/dom": "^10.4.0",
+    "@testing-library/react": "^16.1.0",
+    "@types/react": "^18.3.12",
+    "@types/react-dom": "^18.3.1",
+    "@types/three": "^0.170.0",
+    "@vitejs/plugin-react": "^4.3.4",
+    "@vitest/coverage-v8": "^2.1.8",
+    "gifenc": "^1.0.3",
+    "jsdom": "^25.0.1",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "three": "^0.170.0",
+    "typescript": "~5.6.3",
+    "vite": "^5.4.11",
+    "vite-plugin-dts": "^4.3.0",
+    "vitest": "^2.1.8"
+  }
+}
