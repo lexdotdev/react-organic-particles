@@ -1,8 +1,12 @@
 {
   "name": "@lexdotdev/react-organic-particles",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "GPU-animated organic particle fields for React with Three.js and React Three Fiber",
   "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/lexdotdev/react-organic-particles.git"
+  },
   "type": "module",
   "sideEffects": false,
   "main": "./dist/index.cjs",

@@ -2,6 +2,12 @@
 
 GPU-animated organic 3D particle fields for React, built on Three.js and React Three Fiber.
 
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="assets/organic-particles-dark.gif" />
+  <source media="(prefers-color-scheme: light)" srcset="assets/organic-particles-light.gif" />
+  <img alt="OrganicParticleField — an animated organic particle cloud" src="assets/organic-particles-light.gif" />
+</picture>
+
 ## Overview
 
 `OrganicParticleField` renders a cloud of particles that morphs through organic formations — blobs, nebulae, vortices, waves, turbulent chaos. All motion is computed in shaders on the GPU; the CPU never touches individual particles.
