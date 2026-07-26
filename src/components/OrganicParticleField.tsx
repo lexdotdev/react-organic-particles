@@ -1,4 +1,4 @@
-import { Canvas, type RootState } from "@react-three/fiber";
+import type { RootState } from "@react-three/fiber";
 import type * as React from "react";
 import { forwardRef, useCallback, useEffect, useImperativeHandle, useRef, useState } from "react";
 import { useElementVisibility } from "../hooks/useElementVisibility";
@@ -9,6 +9,7 @@ import { resolveFieldProps } from "../presets/presets";
 import type { OrganicParticleFieldHandle, OrganicParticleFieldProps } from "../types";
 import { parsePalette } from "../utils/colors";
 import { isWebGLAvailable } from "../utils/webgl";
+import { IsolatedCanvas } from "./IsolatedCanvas";
 import { ParticleScene } from "./ParticleScene";
 
 const ROOT_STYLE: React.CSSProperties = {
@@ -43,7 +44,7 @@ export const OrganicParticleField = forwardRef<
   const readyFiredRef = useRef(false);
   const onReadyRef = useRef(props.onReady);
   const detachContextLostRef = useRef<(() => void) | null>(null);
-  const [webglOk, setWebglOk] = useState(false);
+  const [webglOk, setWebglOk] = useState<boolean | null>(null);
   const [contextLost, setContextLost] = useState(false);
 
   const reducedMotion = useReducedMotion();
@@ -92,6 +93,10 @@ export const OrganicParticleField = forwardRef<
     onReadyRef.current?.();
   }, []);
 
+  useEffect(() => {
+    if (webglOk === false || contextLost) handleReady();
+  }, [contextLost, handleReady, webglOk]);
+
   const handleCreated = useCallback((state: RootState) => {
     const element = state.gl.domElement;
     const onLost = (event: Event) => {
@@ -113,7 +118,7 @@ export const OrganicParticleField = forwardRef<
     ...props.style,
   };
 
-  const showFallback = !webglOk || contextLost;
+  const showFallback = webglOk !== true || contextLost;
   return (
     <div
       ref={rootRef}
@@ -124,7 +129,7 @@ export const OrganicParticleField = forwardRef<
       {showFallback ? (
         (props.fallback ?? <div style={FALLBACK_STYLE} />)
       ) : (
-        <Canvas
+        <IsolatedCanvas
           dpr={[1, settings.maxPixelRatio]}
           gl={GL_OPTIONS}
           camera={CAMERA}
@@ -140,7 +145,7 @@ export const OrganicParticleField = forwardRef<
             reducedMotion={reducedMotion}
             onFirstFrame={handleReady}
           />
-        </Canvas>
+        </IsolatedCanvas>
       )}
     </div>
   );

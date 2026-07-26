@@ -28,6 +28,12 @@ describe("OrganicParticleField fallback", () => {
     expect(screen.getByText("no webgl here")).toBeTruthy();
   });
 
+  it("reports the fallback as ready", () => {
+    const onReady = vi.fn();
+    render(<OrganicParticleField fallback={<p>fallback</p>} onReady={onReady} />);
+    expect(onReady).toHaveBeenCalledOnce();
+  });
+
   it("renders an empty div fallback by default", () => {
     const { container } = render(<OrganicParticleField />);
     const root = container.firstElementChild;
